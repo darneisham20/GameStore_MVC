@@ -15,7 +15,7 @@ namespace GameStore_MVC.Data
 		public virtual DbSet <Order> Orders { get; set; }
 		public virtual DbSet <AppUser> AppUsers { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
 			builder.Entity<IdentityRole>().HasData(
