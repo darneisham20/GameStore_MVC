@@ -1,0 +1,72 @@
+﻿@model IEnumerable<GameListItem>
+
+@{
+    ViewData["Title"] = "List of Games!";
+}
+<br />
+
+<h3>
+    Game
+    <small class="text-muted">List Page</small>
+</h3>
+
+<hr />
+
+@*// Search Bar Function*@
+@*<div class="my-2">
+    <form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-12">
+            <label class="visually-hidden" for="title">Search by title</label>
+            <div class="input-group">
+                <div class="input-group-text"></div>
+                <input type="text" class="form-control" value="@item.Title" id="Title" name="Title" placeholder="Search by title">
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a href="/Home/Index" class="btn btn-dark">Reset</a>
+        </div>
+    </form>
+</div>*@
+
+@*Game Cards*@
+
+@if (Model.Count() > 0)
+{
+    <div class="w-100 d-flex flex-wrap" style="justify-content:center">
+        @foreach (var item in Model)
+        {
+            <div class="card mx-4 mb-4" style="width: 16rem">
+                @if (string.IsNullOrEmpty(item.ImageURL))
+                {
+                    <img style="width:100%;height:180px" src="/images/no-image-2.jpg" class="card-img-top" alt="...">
+                }
+                else
+                {
+                    <img style="width:100%; max-height:300px" src="@item.ImageURL" class="card-img-top" alt="Game Image">
+                }
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">
+                        <b>Description: </b>@item.Description <br />
+                        <b>Age Rating: </b>@item.AgeRating <br />
+                        <b>Platform: </b>@item.Platform <br />
+                        <b>Price: $</b>@item.Price <br />
+                    </p>
+
+                </div>
+                <div class="button-body mb-2" style="margin-left:auto;margin-right:auto">
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>There are no available games at this time! Please check again later or create a game.</p>
+}

@@ -1,0 +1,53 @@
+﻿@model GameDevEdit
+
+@{
+	ViewData["Title"] = Model.Developer;
+}
+<br />
+
+<h3>
+	@Model.Developer
+	<small class="text-muted">Edit Page</small>
+</h3>
+
+<hr />
+
+<form asp-action="Edit">
+	<input hidden asp-for="Id" />
+	<div class="form-group">
+		<label asp-for="Developer" class="control-label"></label>
+		<input asp-for="Developer" class="form-control" />
+		<span asp-validation-for="Developer" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="City" class="control-label"></label>
+		<input asp-for="City" class="form-control" placeholder="Indianapolis" />
+		<span asp-validation-for="City" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Country" class="control-label"></label>
+		<input asp-for="Country" class="form-control" placeholder="United States" />
+		<span asp-validation-for="Country" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Est" class="control-label"></label>
+		<input asp-for="Est" class="form-control" placeholder="1998" />
+		<span asp-validation-for="Est" class="text-danger"></span>
+	</div>
+
+	<br />
+
+	<div class="form-group">
+		<input type="submit" value="Save" class="btn btn-success float-right" />
+		<a class="btn btn-primary" asp-action="Index">Show All</a>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

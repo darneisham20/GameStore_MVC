@@ -1,0 +1,94 @@
+﻿@model GameDetail
+
+@{
+	string title = "Delete " + Model.Title;
+	ViewData["Title"] = title;
+}
+
+<br />
+
+<h3>
+	@Model.Title
+	<small class="text-muted">Deletion Page</small>
+</h3>
+<h4 class="text-danger">Are you sure you want to delete @Model.Title?</h4>
+
+<hr />
+
+<dl class="row">
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.Id)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.Id)
+	</dd>
+
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.Title)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.Title)
+	</dd>
+
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.ImageURL)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.ImageURL)
+	</dd>
+
+	<dt class="col-sm-2">
+		Image Preview
+	</dt>
+	<dd class="col-sm-10">
+		<img style="width:150px; max-height:300px" src="@Model.ImageURL" class="card-img-top" alt="Game Image">
+	</dd>
+
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.Description)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.Description)
+	</dd>
+
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.Price)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.Price)
+	</dd>
+
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.QuantityInStock)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.QuantityInStock)
+	</dd>
+
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.AgeRating)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.AgeRating)
+	</dd>
+
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.Platform)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.Platform)
+	</dd>
+
+	<dt class="col-sm-2">
+		@Html.DisplayNameFor(model => model.GameDevs)
+	</dt>
+	<dd class="col-sm-10">
+		@Html.DisplayFor(model => model.GameDevs.Developer)
+	</dd>
+</dl>
+
+
+<form asp-action="Delete">
+	<input type="submit" value="Delete" class="btn btn-danger" />
+	<a class="btn btn-primary" asp-action="Index">Back to Games!</a>
+</form>

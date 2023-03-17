@@ -1,0 +1,93 @@
+﻿@model GameCreate
+
+@{
+	ViewData["Title"] = "Create a new game";
+}
+
+<br />
+
+<h3>
+	Create a new Game
+</h3>
+
+<hr />
+
+<form asp-action="Create">
+	<div class="form-group">
+		<label asp-for="Title" class="control-label"></label>
+		<input asp-for="Title" class="form-control" />
+		<span asp-validation-for="Title" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Description" class="control-label"></label>
+		<textarea input asp-for="Description" class="form-control" id="exampleTextarea" rows="3"></textarea>
+		<span asp-validation-for="Description" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Price" class="control-label"></label>
+		<input asp-for="Price" class="form-control" />
+		<span asp-validation-for="Price" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="QuantityInStock" class="control-label"></label>
+		<input asp-for="QuantityInStock" class="form-control" />
+		<span asp-validation-for="QuantityInStock" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="ImageURL" class="control-label"></label>
+		<input asp-for="ImageURL" class="form-control" />
+		<span asp-validation-for="ImageURL" class="text-danger"></span>
+	</div>
+
+	<br />
+
+	<div class="col-md-4 offset-4 text-center">
+		<img id="ImageURLPreview" class="rounded" style="max-width:150px" alt=" Waiting for image..." />
+	</div>
+
+	<div class="form-group">
+		<label asp-for="AgeRating" class="control-label"></label>
+		<select asp-for="AgeRating" class="form-control" asp-items="Html.GetEnumSelectList<AgeRating>()"></select>
+		<span asp-validation-for="AgeRating" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Platform" class="control-label"></label>
+		<select asp-for="Platform" class="form-control" asp-items="Html.GetEnumSelectList<Platform>()"></select>
+		<span asp-validation-for="Platform" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="GameDevId" class="control-label">Developer</label>
+		<select asp-for="GameDevId" class="form-control" asp-items="@Model.GameOptions" class="form-select">
+			<option disabled selected>-- select game developer --</option>
+		</select>
+		<span asp-validation-for="GameDevId" class="text-danger"></span>
+	</div>
+
+	<br />
+
+	<div class="form-group">
+		<input type="submit" value="Create" class="btn btn-success float-right" />
+		<a class="btn btn-primary" asp-action="Index">Show All</a>
+	</div>
+</form>
+
+
+@section Scripts{
+
+	<script>
+		$(document).ready(function () {
+			var output = document.getElementById('ImageURLPreview');
+			output.src = $("#ImageURL").val();
+		})
+		$("#ImageURL").on("change", function () {
+			var output = document.getElementById('ImageURLPreview');
+			output.src = $(this).val();
+		})
+	</script>
+}
