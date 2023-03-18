@@ -4,6 +4,7 @@ using GameStore_MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameStore_MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230318000231_OrderAppUserGame_Updated")]
+    partial class OrderAppUserGame_Updated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasIndex("GameDevId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("GameStore_MVC.Data.Entities.GameDev", b =>
@@ -90,7 +93,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameDevs", (string)null);
+                    b.ToTable("GameDevs");
                 });
 
             modelBuilder.Entity("GameStore_MVC.Data.Entities.Order", b =>
@@ -111,7 +114,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -143,7 +146,7 @@ namespace GameStore_MVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "52172106-6484-4282-9d5e-3fcf50640204",
+                            Id = "70242e30-f92e-4461-a485-42e36596ca40",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -184,6 +187,10 @@ namespace GameStore_MVC.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -237,6 +244,10 @@ namespace GameStore_MVC.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -324,6 +335,32 @@ namespace GameStore_MVC.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GameStore_MVC.Data.Entities.AppUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SignUp")
+                        .HasColumnType("datetime2");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasDiscriminator().HasValue("AppUser");
+                });
+
             modelBuilder.Entity("GameStore_MVC.Data.Entities.Game", b =>
                 {
                     b.HasOne("GameStore_MVC.Data.Entities.GameDev", "GameDevs")
@@ -393,6 +430,15 @@ namespace GameStore_MVC.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("GameStore_MVC.Data.Entities.AppUser", b =>
+                {
+                    b.HasOne("GameStore_MVC.Data.Entities.Order", "Orders")
+                        .WithMany("Users")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("GameStore_MVC.Data.Entities.Game", b =>
                 {
                     b.Navigation("Orders");
@@ -401,6 +447,11 @@ namespace GameStore_MVC.Migrations
             modelBuilder.Entity("GameStore_MVC.Data.Entities.GameDev", b =>
                 {
                     b.Navigation("Games");
+                });
+
+            modelBuilder.Entity("GameStore_MVC.Data.Entities.Order", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,5 +23,7 @@ namespace GameStore_MVC.Data.Entities
 		public int? GameDevId { get; set; }
 		[ForeignKey(nameof(GameDevId))]
 		public GameDev? GameDevs { get; set; }
+
+		public List<Order> Orders { get; set; }
 	}
 }

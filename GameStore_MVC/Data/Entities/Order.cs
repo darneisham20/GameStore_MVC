@@ -7,9 +7,10 @@ namespace GameStore_MVC.Data.Entities
 	{
 		[Key]
 		public int Id { get; set; }
-		public string AppUserId { get; set; }
-		[ForeignKey(nameof(AppUserId))]
-
 		public DateTime CreateDate { get; set; } = DateTime.UtcNow;
+
+		public int? GameId { get; set; }
+		[ForeignKey(nameof(GameId))]
+		public Game? Games { get; set; }
 	}
 }

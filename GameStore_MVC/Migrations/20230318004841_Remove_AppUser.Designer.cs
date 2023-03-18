@@ -4,6 +4,7 @@ using GameStore_MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameStore_MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230318004841_Remove_AppUser")]
+    partial class Remove_AppUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasIndex("GameDevId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("GameStore_MVC.Data.Entities.GameDev", b =>
@@ -90,7 +93,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameDevs", (string)null);
+                    b.ToTable("GameDevs");
                 });
 
             modelBuilder.Entity("GameStore_MVC.Data.Entities.Order", b =>
@@ -111,7 +114,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

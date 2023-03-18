@@ -13,7 +13,7 @@ namespace GameStore_MVC.Data
 		public virtual DbSet<Game> Games { get; set; }
 		public virtual DbSet<GameDev> GameDevs { get; set; }
 		public virtual DbSet <Order> Orders { get; set; }
-		public virtual DbSet <AppUser> AppUsers { get; set; }
+		public virtual DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
 		{
