@@ -1,4 +1,6 @@
-﻿namespace GameStore_MVC.Models.GameStoreViewModels.CustomerVM
+﻿using System.ComponentModel;
+
+namespace GameStore_MVC.Models.GameStoreViewModels.CustomerVM
 {
 	public class CustomerCreate
 	{

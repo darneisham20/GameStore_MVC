@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace GameStore_MVC.Data.Entities
 {
@@ -10,6 +11,8 @@ namespace GameStore_MVC.Data.Entities
 		}
 		[Key]
 		public int Id { get; set; }
+
+		[DisplayName("Full Name")]
 		public string Name { get; set; } = null!;
 		public string Email { get; set; } = null!;
 		public virtual ICollection<Order> Orders { get; set; }
