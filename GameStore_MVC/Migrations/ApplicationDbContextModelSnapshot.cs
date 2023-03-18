@@ -114,7 +114,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameDevs");
+                    b.ToTable("GameDevs", (string)null);
                 });
 
             modelBuilder.Entity("GameStore_MVC.Data.Entities.Order", b =>
@@ -164,7 +164,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerDetail");
+                    b.ToTable("CustomerDetail", (string)null);
                 });
 
             modelBuilder.Entity("GameStore_MVC.Models.GameStoreViewModels.CustomerVM.CustomerEdit", b =>
@@ -185,7 +185,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerEdit");
+                    b.ToTable("CustomerEdit", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
