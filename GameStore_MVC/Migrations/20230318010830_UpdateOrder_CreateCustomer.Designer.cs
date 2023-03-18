@@ -4,6 +4,7 @@ using GameStore_MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameStore_MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230318010830_UpdateOrder_CreateCustomer")]
+    partial class UpdateOrder_CreateCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,17 +35,15 @@ namespace GameStore_MVC.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", "dev");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("GameStore_MVC.Data.Entities.Game", b =>
@@ -78,14 +79,13 @@ namespace GameStore_MVC.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GameDevId");
 
-                    b.ToTable("Games", "dev");
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("GameStore_MVC.Data.Entities.GameDev", b =>
@@ -129,7 +129,7 @@ namespace GameStore_MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfOrder")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("GameId")
                         .HasColumnType("int");
@@ -143,49 +143,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Orders", "dev");
-                });
-
-            modelBuilder.Entity("GameStore_MVC.Models.GameStoreViewModels.CustomerVM.CustomerDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CustomerDetail");
-                });
-
-            modelBuilder.Entity("GameStore_MVC.Models.GameStoreViewModels.CustomerVM.CustomerEdit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CustomerEdit");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -217,7 +175,7 @@ namespace GameStore_MVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "de9b5f4f-4c04-47b1-a9e0-0d9484e56160",
+                            Id = "d5dea83c-5338-4780-98eb-9990e8f7d5b1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -412,14 +370,14 @@ namespace GameStore_MVC.Migrations
                     b.HasOne("GameStore_MVC.Data.Entities.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
-                        .IsRequired()
-                        .HasConstraintName("FK__Transacti__Custo__3E52440B");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("GameStore_MVC.Data.Entities.Game", "Game")
                         .WithMany("Orders")
                         .HasForeignKey("GameId")
-                        .IsRequired()
-                        .HasConstraintName("FK__Transacti__Produ__3D5E1FD2");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 

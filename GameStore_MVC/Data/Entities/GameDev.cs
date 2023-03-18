@@ -2,7 +2,7 @@
 
 namespace GameStore_MVC.Data.Entities
 {
-	public class GameDev
+	public partial class GameDev
 	{
 		[Key]
 		public int Id { get; set; }

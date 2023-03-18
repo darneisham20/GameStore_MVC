@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GameStore_MVC.Data.Entities
 {
-	public class Game
+	public partial class Game
 	{
 		[Key]
 		public int Id { get; set; }

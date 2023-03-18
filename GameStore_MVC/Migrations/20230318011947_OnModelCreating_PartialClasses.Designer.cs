@@ -4,6 +4,7 @@ using GameStore_MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameStore_MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230318011947_OnModelCreating_PartialClasses")]
+    partial class OnModelCreating_PartialClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,7 +167,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerDetail");
+                    b.ToTable("CustomerDetailModel");
                 });
 
             modelBuilder.Entity("GameStore_MVC.Models.GameStoreViewModels.CustomerVM.CustomerEdit", b =>
@@ -185,7 +188,7 @@ namespace GameStore_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerEdit");
+                    b.ToTable("CustomerEditModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -217,7 +220,7 @@ namespace GameStore_MVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "de9b5f4f-4c04-47b1-a9e0-0d9484e56160",
+                            Id = "e8bdc058-0ad4-4d75-a482-8a147ae920ca",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

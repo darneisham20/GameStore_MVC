@@ -1,0 +1,66 @@
+﻿@model IEnumerable<GameStore_MVC.Data.Entities.Order>
+
+@*<component type="typeof(OrderList)" render-mode="ServerPrerendered" param-transactions="Model" />*@
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+
+<h3>
+    Order
+    <small class="text-muted">List Page</small>
+</h3>
+
+<hr />
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Game)
+            </th >
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Game.Title)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.DateOfOrder)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Game.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Game.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfOrder)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
